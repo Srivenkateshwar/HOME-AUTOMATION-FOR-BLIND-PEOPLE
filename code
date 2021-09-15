@@ -1,0 +1,47 @@
+#include <Servo.h>
+Servo servo_test;
+int mr_1=4;
+int mr_2=5;
+int buzzer=2;
+int tilt_1=7;
+int tilt_2=8;
+int pir_pin=6;
+int pir_stat=0;
+int val_1=0;
+int val_2=0;
+
+void setup()
+{
+  pinMode(buzzer, OUTPUT);
+  pinMode(mr_1, OUTPUT);
+  pinMode(mr_2, OUTPUT);
+  pinMode(tilt_1, INPUT);
+  pinMode(tilt_2, INPUT);
+  pinMode(pir_pin, INPUT);
+  servo_test.attach(3);
+
+}
+
+void loop()
+{ pir_stat=digitalRead(pir_pin);
+  val_1=digitalRead(tilt_1);
+  val_2=digitalRead(tilt_2);
+ if (val_1==LOW)
+ {digitalWrite(mr_1,HIGH);
+  digitalWrite(mr_2,LOW);}
+ else
+ {digitalWrite(mr_1,LOW);
+  digitalWrite(mr_2,LOW);
+ }
+ if(pir_stat==HIGH && val_2==LOW)
+ {servo_test.write(60);
+  digitalWrite(buzzer,HIGH);
+  delay(100);}
+ else
+ {servo_test.write(0);
+  digitalWrite(buzzer,LOW);
+  
+ }
+  
+  
+}
